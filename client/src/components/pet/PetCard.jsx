@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const PetCard = ({ pet }) => (
   <Link
     to={`/pets/${pet._id}`}
@@ -7,7 +9,7 @@ const PetCard = ({ pet }) => (
   >
     <div className="aspect-square relative overflow-hidden rounded-t-lg">
       <img
-        src={`http://localhost:5000/${pet.image}`}
+        src={`${API_URL}/${pet.image}`}
         alt={pet.name}
         className="object-cover w-full h-full group-hover:scale-105 transition-transform"
       />

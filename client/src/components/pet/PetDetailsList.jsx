@@ -17,26 +17,10 @@ const PetDetailsList = ({ details }) => (
       Medical & Physical Details
     </h2>
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <DetailItem
-        icon={User2}
-        label="Gender"
-        value={details.gender}
-      />
-      <DetailItem
-        icon={Ruler}
-        label="Size"
-        value={details.size}
-      />
-      <DetailItem
-        icon={Palette}
-        label="Color"
-        value={details.color}
-      />
-      <DetailItem
-        icon={Stethoscope}
-        label="Health"
-        value={details.health}
-      />
+      <DetailItem icon={User2} label="Gender" value={details.gender} />
+      <DetailItem icon={Ruler} label="Size" value={details.size} />
+      <DetailItem icon={Palette} label="Color" value={details.color} />
+      <DetailItem icon={Stethoscope} label="Health" value={details.health} />
       <DetailItem
         icon={Home}
         label="House Trained"

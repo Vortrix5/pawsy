@@ -1,5 +1,7 @@
-import { PenSquare, Trash2 } from 'lucide-react'
-import StatusBadge from '../shared/StatusBadge'
+import { PenSquare, Trash2 } from "lucide-react";
+import StatusBadge from "../shared/StatusBadge";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 const PetList = ({ pets, onEdit, onDelete }) => (
   <div className="bg-white rounded-lg shadow overflow-hidden">
@@ -31,7 +33,7 @@ const PetList = ({ pets, onEdit, onDelete }) => (
                 <div className="h-10 w-10 flex-shrink-0">
                   <img
                     className="h-10 w-10 rounded-full object-cover"
-                    src={`http://localhost:5000/${pet.image}`}
+                    src={`${API_URL}/${pet.image}`}
                     alt={pet.name}
                   />
                 </div>
@@ -75,6 +77,6 @@ const PetList = ({ pets, onEdit, onDelete }) => (
       </tbody>
     </table>
   </div>
-)
+);
 
-export default PetList
+export default PetList;
