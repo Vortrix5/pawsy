@@ -1,6 +1,6 @@
 const ApplicationFilters = ({ currentFilter, onFilterChange }) => {
   const filters = [
-    { id: "all", label: "All", color: "primary" },
+    { id: "all", label: "All", color: "gray" },
     { id: "pending", label: "Pending", color: "yellow" },
     { id: "approved", label: "Approved", color: "green" },
     { id: "rejected", label: "Rejected", color: "red" },
@@ -14,7 +14,7 @@ const ApplicationFilters = ({ currentFilter, onFilterChange }) => {
           onClick={() => onFilterChange(id)}
           className={`px-4 py-2 rounded-md ${
             currentFilter === id
-              ? `bg-${color}-${color === "primary" ? "600" : "500"} text-white`
+              ? `bg-${color}-600 text-white`
               : "bg-gray-100 text-gray-700 hover:bg-gray-200"
           }`}
         >
