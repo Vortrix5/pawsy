@@ -2,6 +2,7 @@
   "scripts": {
     "install": "cd client && npm install && cd ../server && npm install",
     "clean": "cd client && npm run clean && cd ../server && npm run clean",
+    "build": "cd client && npm run build && cd ../server && npm run build",
     "dev:client": "cd client && npm run dev",
     "dev:server": "cd server && npm run dev",
     "dev": "concurrently -n \"BACKEND,FRONTEND\" -c \"red,blue\" -p \"[{name}]\" \"npm run dev:client\" \"npm run dev:server\""
