@@ -81,7 +81,7 @@ const PetDetails = () => {
           <div className="p-6">
             <div className="rounded-xl overflow-hidden">
               <PetImageGallery
-                image={`http://localhost:5000/${pet.image}`}
+                image={pet.image}
                 name={pet.name}
               />
             </div>
