@@ -8,11 +8,9 @@ import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import "./styles/globals.css";
 
-// Layout Components
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 
-// Pages
 import Home from "./pages/Home";
 import PetListing from "./pages/PetListing";
 import PetDetails from "./pages/PetDetails";
@@ -27,10 +25,8 @@ import ApplicationDetails from "./pages/ApplicationDetails";
 function AppContent() {
   const location = useLocation();
 
-  // Only show footer on these routes
   const showFooterRoutes = ["/", "/pets", "/pets/:id", "/login", "/register"];
   const shouldShowFooter = showFooterRoutes.some((route) => {
-    // Convert route pattern to regex to handle dynamic routes
     const pattern = new RegExp("^" + route.replace(":id", "[^/]+") + "$");
     return pattern.test(location.pathname);
   });

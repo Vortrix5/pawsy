@@ -57,7 +57,7 @@ const AdminApplications = () => {
 
       <ApplicationList
         applications={filteredApplications}
-        onStatusUpdate={handleStatusUpdate}
+        onUpdateStatus={handleStatusUpdate}
       />
     </div>
   );

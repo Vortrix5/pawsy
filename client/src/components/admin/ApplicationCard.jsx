@@ -1,83 +1,104 @@
-import {
-  CheckCircleIcon,
-  XCircleIcon,
-  ClockIcon,
-} from "@heroicons/react/24/solid";
-
-const getStatusIcon = (status) => {
-  switch (status) {
-    case "pending":
-      return <ClockIcon className="h-5 w-5 text-yellow-500" />;
-    case "approved":
-      return <CheckCircleIcon className="h-5 w-5 text-green-500" />;
-    case "rejected":
-      return <XCircleIcon className="h-5 w-5 text-red-500" />;
-    default:
-      return null;
-  }
-};
+import StatusBadge from "../shared/StatusBadge";
+import { User, PawPrint, Calendar, ArrowRight } from "lucide-react";
+import { useState } from "react";
+import ApplicationDetailsDialog from "./ApplicationDetailsDialog";
 
 const ApplicationCard = ({ application, onStatusUpdate }) => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
   return (
-    <div className="bg-white rounded-lg shadow-sm p-6">
-      <div className="flex justify-between items-start">
-        <div>
-          <div className="flex items-center">
-            <h3 className="text-lg font-medium text-gray-900">
-              {application.applicant.name}
-            </h3>
-            <span className="ml-2 px-2.5 py-0.5 rounded-full text-xs font-medium inline-flex items-center space-x-1">
-              {getStatusIcon(application.status)}
-              <span className="ml-1 capitalize">{application.status}</span>
-            </span>
+    <>
+      <div
+        onClick={() => setIsDialogOpen(true)}
+        className="bg-white rounded-xl shadow-lg p-6 relative hover:shadow-xl transition-all duration-300 border border-gray-100 cursor-pointer hover:scale-[1.02] group"
+      >
+        <div className="absolute top-6 right-6">
+          <StatusBadge status={application.status} withIcon={false} />
+        </div>
+
+        <div className="flex gap-6">
+          {/* Pet Image */}
+          <div className="hidden sm:block w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+            <img
+              src={`http://localhost:5000/${application.pet.image}`}
+              alt={application.pet.name}
+              className="w-full h-full object-cover"
+            />
           </div>
-          <p className="mt-1 text-sm text-gray-500">
-            Pet: {application.pet.name}
-          </p>
-          <p className="mt-1 text-sm text-gray-500">
-            Submitted: {new Date(application.createdAt).toLocaleDateString()}
-          </p>
-        </div>
-        <div className="flex space-x-2">
-          {application.status === "pending" && (
-            <>
-              <button
-                onClick={() => onStatusUpdate(application._id, "approved")}
-                className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
-              >
-                Approve
-              </button>
-              <button
-                onClick={() => onStatusUpdate(application._id, "rejected")}
-                className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-red-600 hover:bg-red-700"
-              >
-                Reject
-              </button>
-            </>
-          )}
+
+          <div className="flex-1 min-w-0 pr-16">
+            {/* Header Section */}
+            <div className="mb-4">
+              <div className="flex items-center gap-3 mb-2">
+                <User className="h-5 w-5 text-gray-400" />
+                <h3 className="text-lg font-bold text-gray-900 truncate">
+                  {application.applicant.name}
+                </h3>
+              </div>
+              <div className="flex items-center gap-4 text-sm text-gray-600">
+                <div className="flex items-center gap-2">
+                  <PawPrint className="h-4 w-4 text-gray-400" />
+                  <span className="truncate">{application.pet.name}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Calendar className="h-4 w-4 text-gray-400" />
+                  <span className="truncate">
+                    {new Date(application.createdAt).toLocaleDateString()}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Details Preview */}
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-gray-900">
+                    Living Arrangement
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    {application.personalInfo.livingArrangement
+                      .charAt(0)
+                      .toUpperCase() +
+                      application.personalInfo.livingArrangement.slice(1)}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-900">
+                    Experience
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    {application.questionnaire.experience
+                      ? application.questionnaire.experience.length > 25
+                        ? application.questionnaire.experience.substring(
+                            0,
+                            25
+                          ) + "..."
+                        : application.questionnaire.experience
+                      : "No experience specified"}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* View Details Link */}
+            <div className="mt-4 flex items-center justify-end">
+              <span className="text-sm font-medium text-blue-600 group-hover:text-blue-700 flex items-center gap-1">
+                View Details
+                <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+              </span>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="mt-4">
-        <h4 className="text-sm font-medium text-gray-900">Application Details</h4>
-        <div className="mt-2 text-sm text-gray-500">
-          <p>
-            Living Situation:{" "}
-            {application.personalInfo.livingArrangement.charAt(0).toUpperCase() +
-              application.personalInfo.livingArrangement.slice(1)}
-          </p>
-          <p>
-            Experience:{" "}
-            {application.questionnaire.experience || "No experience specified"}
-          </p>
-          <p>
-            Other Pets:{" "}
-            {application.questionnaire.hasOtherPets
-              ? application.questionnaire.otherPetsDetails || "Yes"
-              : "No other pets"}
-          </p>
-        </div>
-      </div>
-    </div>
+
+      <ApplicationDetailsDialog
+        application={application}
+        isOpen={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+        onStatusUpdate={onStatusUpdate}
+      />
+    </>
   );
 };
 
