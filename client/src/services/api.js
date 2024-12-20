@@ -9,7 +9,6 @@ const api = axios.create({
   },
 });
 
-// Add token to requests
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token) {
@@ -18,14 +17,10 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Auth API
 export const login = (credentials) => api.post("/users/login", credentials);
 export const register = (userData) => api.post("/users/register", userData);
-export const getUserProfile = () => api.get("/users/profile");
-export const updateUserProfile = (userData) =>
-  api.put("/users/profile", userData);
 
-// Pets API
+
 export const getPets = (params) => api.get("/pets", { params });
 export const getPetById = (id) => api.get(`/pets/${id}`);
 export const createPet = (petData) => {
@@ -68,7 +63,6 @@ export const deletePet = (id) => api.delete(`/pets/${id}`);
 export const updatePetStatus = (id, status) =>
   api.patch(`/pets/${id}/status`, { status });
 
-// Applications API
 export const getApplications = () => api.get("/applications");
 export const getUserApplications = () => api.get("/applications/me");
 export const getApplicationById = (id) => api.get(`/applications/${id}`);

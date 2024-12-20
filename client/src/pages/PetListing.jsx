@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo } from "react";
-import { Link } from "react-router-dom";
 import { getPets } from "../services/api";
 import PetSearchBar from "../components/pet/PetSearchBar";
 import PetCard from "../components/pet/PetCard";

@@ -9,6 +9,7 @@ import userRoutes from "./routes/userRoutes.js";
 import petRoutes from "./routes/petRoutes.js";
 import applicationRoutes from "./routes/applicationRoutes.js";
 import { notFound, errorHandler } from "./middlewares/error.js";
+import swaggerDocs from "./swagger.js";
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ connectDB();
 
 const app = express();
 
+swaggerDocs(app);
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
