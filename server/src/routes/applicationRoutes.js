@@ -66,7 +66,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /applications:
+ * /api/applications:
  *   post:
  *     summary: Create a new application
  *     tags: [Applications]
@@ -106,7 +106,7 @@ router.route('/')
 
 /**
  * @swagger
- * /applications/me:
+ * /api/applications/me:
  *   get:
  *     summary: Get user applications
  *     tags: [Applications]
@@ -126,7 +126,7 @@ router.get('/me', protect, getUserApplications);
 
 /**
  * @swagger
- * /applications/{id}:
+ * /api/applications/{id}:
  *   get:
  *     summary: Get application by ID
  *     tags: [Applications]
@@ -154,7 +154,7 @@ router.route('/:id')
 
 /**
  * @swagger
- * /applications/{id}/status:
+ * /api/applications/{id}/status:
  *   patch:
  *     summary: Update application status
  *     tags: [Applications]

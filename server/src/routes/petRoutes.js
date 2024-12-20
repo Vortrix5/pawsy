@@ -54,7 +54,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /pets:
+ * /api/pets:
  *   get:
  *     summary: Get all pets
  *     tags: [Pets]
@@ -104,7 +104,7 @@ router.route('/')
 
 /**
  * @swagger
- * /pets/{id}:
+ * /api/pets/{id}:
  *   get:
  *     summary: Get pet by ID
  *     tags: [Pets]
@@ -184,7 +184,7 @@ router.route('/:id')
 
 /**
  * @swagger
- * /pets/{id}/status:
+ * /api/pets/{id}/status:
  *   patch:
  *     summary: Update pet status
  *     tags: [Pets]

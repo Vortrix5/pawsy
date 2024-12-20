@@ -20,10 +20,10 @@ connectDB();
 
 const app = express();
 
-swaggerDocs(app);
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+swaggerDocs(app);
 
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
